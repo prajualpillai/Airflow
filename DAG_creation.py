@@ -20,9 +20,9 @@ with DAG(
         logging.info("Hi python")
 
 
-    def greeting2():
+    def greeting2(str):
         import logging
-        logging.info("bye python")
+        logging.info(str)
 
 
     # Defining tasks through which the functions are called
@@ -31,6 +31,7 @@ with DAG(
                                          python_callable=greeting)
     op2 = python_operator.PythonOperator(task_id='greet2',
                                          dag=dag,
+                                         op_kwargs={'str':'Bye Python'},
                                          python_callable=greeting2)
 
     # Defining the order in which the tasks will be run
